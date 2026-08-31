@@ -1,0 +1,10 @@
+Nesse projeto foi possível identificar que a classe RelatorioAluno violava o princípio SRP, tendo em vista que estava acumulando as responsabilidades 
+da formatação do relatório do aluno, da gravação do conteudo em arquivo e envio de emails.
+Essas responsabilidades podem mudar por mais de um motivo, desta forma seria obrigatoriamente necessária a alteração da classe de origem. Para solucionar deixei RelatorioAluno apenas reponsavel por formatar e criei outras duas classes para as outras responsabilidades SalvadorRelatorio e EnviadoEmai;
+
+Após as alterações do metodos foi necessario corrigir os fluxos na Main ja que salvarEmArquivo() e enviarPorEmail() deixaram de pertencer a RelatorioAluno;
+
+Foi realizada a refatoração do sistema de descontos, no código original era utilizado uma condicional para os teste referente aos tipos de matricula com a porcentagem do respectivo desconto, para solução foi criada implentações especificas;
+
+Solucionada dependencia direta, a classe matricula estava obrigatoriamente definindo que os dados seriam gravados com GravadoMySQL, para isso foi criada MatriculaRepositorio com o metodo void gravar(String dados), depois foi realizado o ajuste na Main.
+
