@@ -18,6 +18,13 @@ package siga;
  *   - Etapa 4: adicionar um novo perfil (ex.: "SECRETARIA") sem modificar o
  *     código existente, comprovando o respeito ao OCP.
  */
+
+/*
+    É possível identificar a violação do OCP, pois caso o sistema precise de um novo tipo de usuário, seria necessário modificar o método montarPainel,
+    adicionando mais uma condicional, indicando que a classe não está fechada para modificações. Além disso, GerenciadorLogin está dependendo 
+    diretamente das classes concretas de Painel, criando um acoplamento que pode dificultar extensões.
+*/
+
 public class GerenciadorLogin {
 
     public Painel montarPainel(String tipoUsuario) {
