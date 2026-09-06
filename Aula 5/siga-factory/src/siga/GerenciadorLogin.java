@@ -27,11 +27,9 @@ package siga;
 
 public class GerenciadorLogin {
 
-    public Painel montarPainel(String tipoUsuario) {
-        FabricaPainel fabrica = new FabricaPainel();
-        Painel painel = fabrica.criarPainel(tipoUsuario);
-
-        painel.montar();    
+    public Painel montarPainel(CriadorPainel criador) {
+        Painel painel = criador.criarPainel();
+        painel.montar();
         return painel;
     }
 }

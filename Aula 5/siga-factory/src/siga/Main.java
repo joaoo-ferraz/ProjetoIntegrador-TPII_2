@@ -16,11 +16,11 @@ public class Main {
         GerenciadorLogin login = new GerenciadorLogin();
 
         // Simulação de logins de diferentes perfis.
-        login.montarPainel("ALUNO");
+        login.montarPainel(new CriadorPainelAluno());
         System.out.println();
-        login.montarPainel("PROFESSOR");
+        login.montarPainel(new CriadorPainelProfessor());
         System.out.println();
-        login.montarPainel("COORDENADOR");
+        login.montarPainel(new CriadorPainelCoordenador());
 
     }
 }
