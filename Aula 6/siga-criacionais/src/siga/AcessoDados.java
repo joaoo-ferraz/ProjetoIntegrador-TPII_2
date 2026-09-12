@@ -1,30 +1,11 @@
 package siga;
 
-/**
- * Código INICIAL da atividade — contém os problemas PROPOSITAIS a refatorar.
- *
- * PROBLEMA 1 — mistura de fornecedores (falta Abstract Factory):
- * o método conectar escolhe conexão e comando por condicionais e "new"
- * separados, sem nada que garanta que ambos sejam do MESMO fornecedor. É
- * possível, por engano, abrir uma conexão MySQL e criar um comando PostgreSQL
- * — uma combinação que quebra em tempo de execução.
- *
- * PROBLEMA 2 — construtor telescópico (falta Builder):
- * a configuração de uma consulta é passada por um método com muitos parâmetros
- * opcionais (limite, offset, ordenação, timeout...), ilegível e sujeito a erro
- * de ordem dos argumentos.
- *
- * PROBLEMA 3 — instância não controlada (falta Singleton):
- * nada impede que várias partes do sistema criem seu próprio AcessoDados,
- * quando deveria existir um único ponto de acesso ao banco.
- *
- * Tarefa:
- *   - Etapa 2: criar um Abstract Factory (ex.: FabricaBanco, com FabricaMySQL
- *     e FabricaPostgreSQL) que produza famílias coerentes de Conexao e Comando.
- *   - Etapa 3: criar um Builder para a configuração da consulta (parâmetros
- *     opcionais nomeados e encadeáveis).
- *   - Etapa 4: transformar o AcessoDados em um Singleton.
- */
+
+/* 1º O primeiro problema identificado é a falta de conexão entre objetos da mesma família, 
+o que permite misturar elementos de origens diferentes; 
+2º O segundo está no excesso de parametros adicionais deixando o código "sujo", ilegivel, extensa e sujeito a erros; 
+3º A terceira é que na classe AcessoDados não existe um controle que garanta uma única instancia. */
+
 public class AcessoDados {
 
     // PROBLEMA 1: conexão e comando criados separadamente, sem garantia de coerência.
