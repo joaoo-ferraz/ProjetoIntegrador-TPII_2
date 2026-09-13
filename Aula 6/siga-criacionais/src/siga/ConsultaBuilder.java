@@ -6,7 +6,6 @@ public class ConsultaBuilder {
     private String ordenacao;
     private int limite;
     private int offset;
-    private int timeoutSegundos;
     private boolean somenteAtivos;
 
     public ConsultaBuilder(String tabela) {
@@ -33,18 +32,8 @@ public class ConsultaBuilder {
         return this;
     }
 
-    public ConsultaBuilder comTimeoutSegundos(int timeoutSegundos) {
-        this.timeoutSegundos = timeoutSegundos;
-        return this;
-    }
-    
     public ConsultaBuilder comSomenteAtivos(boolean somenteAtivos) {
         this.somenteAtivos = somenteAtivos;
-        return this;
-    }
-
-    public ConsultaBuilder comTabela(String tabela) {
-        this.tabela = tabela;
         return this;
     }
 
