@@ -14,12 +14,13 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("=== SIGA - Atividade de Padrões Criacionais (código inicial) ===\n");
 
-        AcessoDados acesso = new AcessoDados();
+        AcessoDados acessoDados = AcessoDados.getInstancia();
+
         FabricaBanco fabricaMySQL = new FabricaMySQL();
-        acesso.conectar(fabricaMySQL);
+        acessoDados.conectar(fabricaMySQL);
 
         FabricaBanco fabricaPostgreSQL = new FabricaPostgreSQL();
-        acesso.conectar(fabricaPostgreSQL);
+        acessoDados.conectar(fabricaPostgreSQL);
         
         ConsultaBuilder builder = new ConsultaBuilder("aluno");
         builder.comFiltro("curso = 'DSM'");
