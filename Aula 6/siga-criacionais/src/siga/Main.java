@@ -21,16 +21,14 @@ public class Main {
         FabricaBanco fabricaPostgreSQL = new FabricaPostgreSQL();
         acesso.conectar(fabricaPostgreSQL);
         
+        ConsultaBuilder builder = new ConsultaBuilder("aluno");
+        builder.comFiltro("curso = 'DSM'");
+        builder.comOrdenacao("nome");
+        builder.comLimite(50);
+        builder.comSomenteAtivos(true);
 
-        System.out.println();
-        // PROBLEMA 2 em ação: o que significa cada número nesta chamada?
-        String consulta = acesso.montarConsulta("aluno", "curso = 'DSM'", "nome",
-                50, 0, 30, true);
+        String consulta = builder.construir();
         System.out.println("Consulta montada: " + consulta);
 
-        System.out.println("\nObserve: nada garante que conexão e comando sejam do mesmo");
-        System.out.println("fornecedor (Abstract Factory resolve); o método de consulta tem");
-        System.out.println("parâmetros demais (Builder resolve); e não há controle de");
-        System.out.println("instância única do acesso ao banco (Singleton resolve).");
     }
 }
