@@ -2,35 +2,20 @@ package siga;
 
 import java.util.List;
 
-/**
- * Código INICIAL da atividade — contém o problema PROPOSITAL a refatorar.
- *
- * PROBLEMA 1 — violação do SRP (Responsabilidade Única):
- * esta classe deveria cuidar apenas da REGRA DE NEGÓCIO da matrícula, mas
- * também monta e executa comandos SQL. São dois motivos distintos para mudar:
- * uma alteração na regra acadêmica e uma alteração na estrutura da tabela.
- *
- * PROBLEMA 2 — violação do DIP (Inversão de Dependência):
- * a classe depende diretamente da tecnologia de persistência (BancoSimulado,
- * que aqui faz o papel do driver do banco), em vez de depender de uma abstração.
- *
- * PROBLEMA 3 — duplicação:
- * observe que o mesmo bloco de busca aparece em matricular() e em
- * gerarRelatorio(). Uma mudança na tabela obriga a alterar os dois — e é fácil
- * esquecer um deles.
- *
- * Consequência prática: para testar a regra "média não pode ser negativa",
- * seria necessário um banco de dados disponível. Testar um "if" exigindo
- * infraestrutura é um forte sinal de design acoplado.
- *
- * Tarefa:
- *   - Etapa 2: definir a interface AlunoDAO com operações do domínio
- *     (inserir, buscarPorMatricula, listarTodos, atualizar, remover).
- *   - Etapa 3: implementar AlunoDAOMemoria usando um Map interno.
- *   - Etapa 4: fazer esta classe receber o AlunoDAO pelo construtor e remover
- *     todo o SQL daqui.
- *   - Etapa 5: demonstrar a troca de implementação sem alterar a regra.
- */
+/*
+1º SRP: A classe ServicoMatricula viola o princípio da responsabilidade única
+(SRP), ela mistura a regra de negócio da matrícula com a lógica de acesso
+a dados.
+
+2º DIP: A classe ServicoMatricula também viola o princípio da inversão de
+dependência (DIP), porque depende diretamente de uma implementação concreta,
+BancoSimulado, para acessar os dados. O objetivo é criar AlunoDAO
+para que a regra de negócio dependa de uma a abstração, e não de uma
+implementação concreta.
+
+3º Duplicação: Os métodos matricular e gerarRelatorio possuem lógica de acesso
+a dados espalhada e repetida, violando o princípio DRY.
+*/
 public class ServicoMatricula {
 
     public void matricular(Aluno aluno) {
