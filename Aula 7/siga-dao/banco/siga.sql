@@ -1,0 +1,12 @@
+CREATE DATABASE IF NOT EXISTS siga
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
+
+USE siga;
+
+CREATE TABLE IF NOT EXISTS aluno (
+    matricula VARCHAR(20) NOT NULL,
+    nome VARCHAR(120) NOT NULL,
+    media DOUBLE NOT NULL,
+    PRIMARY KEY (matricula)
+);
