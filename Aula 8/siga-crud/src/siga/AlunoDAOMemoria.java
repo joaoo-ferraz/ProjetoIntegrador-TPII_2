@@ -26,8 +26,7 @@ public class AlunoDAOMemoria implements AlunoDAO {
 
     @Override
     public List<Aluno> listarTodos() {
-        // DESLIZE 1: devolve a própria coleção interna, sem cópia defensiva.
-        return armazem;
+        return new ArrayList<>(armazem);  
     }
 
     @Override
@@ -43,8 +42,10 @@ public class AlunoDAOMemoria implements AlunoDAO {
 
     @Override
     public void remover(String matricula) {
-        // DESLIZE 2: não verifica se existia; falha em silêncio.
         Aluno encontrado = buscarPorMatricula(matricula);
-        armazem.remove(encontrado);   // remove(null) simplesmente não faz nada
+        if (encontrado == null) {
+            throw new IllegalStateException("Aluno com matrícula " + matricula + " não encontrado.");
+        }
+        armazem.remove(encontrado); 
     }
 }
