@@ -21,13 +21,15 @@ public class Main {
         Aluno bolsista = alunoDAO.buscarPorMatricula("2024001");
         bolsista.setBolsista(true);
 
-        TelaMatricula tela = new TelaMatricula(
-                new ValidadorCpf(),
-                alunoDAO,
-                new ControleVagas(),
-                new CalculadoraDesconto(),
-                new MatriculaDAOMemoria(),
-                new NotificadorEmail());
+        FachadaMatricula fachadaMatricula = new FachadaMatricula(
+        new ValidadorCpf(),
+        alunoDAO,
+        new ControleVagas(),
+        new CalculadoraDesconto(),
+        new MatriculaDAOMemoria(),
+        new NotificadorEmail());
+
+        TelaMatricula tela = new TelaMatricula(fachadaMatricula);
 
         tela.aoClicarEmMatricular("2024001", "123.456.789-09", "DSM-2A");
         tela.aoClicarEmMatricular("2024002", "111", "DSM-2A");
