@@ -3,31 +3,40 @@ package siga;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Composto da estrutura curricular — hoje sem interface em comum com Disciplina.
- *
- * DESLIZE 3 (parte A) — a coleção é de Object, porque não existe um tipo que
- * abranja tanto Disciplina quanto Modulo. O compilador deixa de ajudar, e a
- * responsabilidade de descobrir o tipo recai sobre quem percorre a estrutura.
- */
-public class Modulo {
+public class Modulo implements ItemCurricular {
 
     private final String nome;
-    private final List<Object> filhos = new ArrayList<>();
+    private final List<ItemCurricular> filhos = new ArrayList<>();
 
     public Modulo(String nome) {
         this.nome = nome;
     }
 
+    @Override
     public String getNome() {
         return nome;
     }
 
-    public void adicionar(Object filho) {
+    public void adicionar(ItemCurricular filho) {
         filhos.add(filho);
     }
 
-    public List<Object> getFilhos() {
-        return filhos;
+    @Override
+    public int getCargaHoraria() {
+        int total = 0;
+        for (ItemCurricular filho : filhos) {
+            total += filho.getCargaHoraria();
+        }
+        return total;
     }
+
+    @Override
+    public void imprimir(int nivel) {
+        String prefixo = "  ".repeat(nivel);
+        System.out.println(prefixo + "[" + nome + "]");
+        for (ItemCurricular filho : filhos) {
+            filho.imprimir(nivel + 1);
+        }
+    }
+  
 }
