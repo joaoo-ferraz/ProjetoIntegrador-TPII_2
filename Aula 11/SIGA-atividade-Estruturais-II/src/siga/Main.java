@@ -27,7 +27,10 @@ public class Main {
 
         Modulo segundo = new Modulo("2o semestre");
         segundo.adicionar(new Disciplina("Tecnicas de Programacao II", 80));
-        segundo.adicionar(new Disciplina("Desenvolvimento Web II", 80));
+
+        Modulo trilha = new Modulo("Trilha de Desenvolvimento Web");
+        trilha.adicionar(new Disciplina("Desenvolvimento Web II", 80));
+        segundo.adicionar(trilha);
 
         curso.adicionar(primeiro);
         curso.adicionar(segundo);
