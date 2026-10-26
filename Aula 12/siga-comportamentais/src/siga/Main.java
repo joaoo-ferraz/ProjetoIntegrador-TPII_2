@@ -1,9 +1,5 @@
 package siga;
 
-/**
- * Demonstra os dois deslizes acontecendo. Execute e observe a saída:
- * é dela que partem as etapas da ficha de atividade prática.
- */
 public class Main {
 
     public static void main(String[] args) {
@@ -18,28 +14,26 @@ public class Main {
         double valorBase = 800.00;
         GeradorBoleto gerador = new GeradorBoleto();
 
-        System.out.println();
-        System.out.println("1) Desconto calculado em DOIS lugares diferentes");
-        for (Aluno a : new Aluno[] { bolsista, egresso }) {
-            Matricula m = new Matricula(a, "DSM-2A");
+        Matricula[] matriculas = {
+                new Matricula(bolsista, "DSM-2A", new DescontoBolsista()),
+                new Matricula(egresso, "DSM-2A", new DescontoEgresso())
+        };
+
+        System.out.println();     
+        for (Matricula m : matriculas) {
             System.out.printf("   %-14s matricula: R$ %.2f%n",
-                    a.getNome(), m.calcularValor(valorBase));
-            gerador.emitir(a, valorBase);
+                    m.getAluno().getNome(), m.calcularValor(valorBase));
+            gerador.emitir(m, valorBase);
         }
-        System.out.println("   >> DESLIZE 1: Ana Pereira paga R$ 720,00 na matricula");
-        System.out.println("      e R$ 800,00 no boleto. A mesma cadeia de condicionais");
-        System.out.println("      existe nas duas classes, e o desconto de egresso");
-        System.out.println("      nunca chegou ao gerador de boletos.");
 
         System.out.println();
-        System.out.println("2) Reacoes a matricula, todas dentro da fachada");
         FachadaMatricula fachada = new FachadaMatricula();
-        fachada.matricular(bolsista, "DSM-2A", false);
+        fachada.matricular(bolsista, "DSM-2A", new DescontoBolsista(), false);
 
         System.out.println();
         System.out.println("   Agora com a turma lotada, e o aviso a coordenacao falhando:");
         try {
-            fachada.matricular(egresso, "DSM-2B", true);
+            fachada.matricular(egresso, "DSM-2B", new DescontoEgresso(), true);
         } catch (IllegalStateException e) {
             System.out.println("   [erro] " + e.getMessage());
         }
