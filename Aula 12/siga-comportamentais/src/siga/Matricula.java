@@ -1,16 +1,17 @@
 package siga;
 
-
 public class Matricula {
 
     private final Aluno aluno;
     private final String codigoTurma;
     private final PoliticaDesconto politica;
+    private final boolean turmaLotada;
 
-    public Matricula(Aluno aluno, String codigoTurma, PoliticaDesconto politica) {
+    public Matricula(Aluno aluno, String codigoTurma, PoliticaDesconto politica, boolean turmaLotada) {
         this.aluno = aluno;
         this.codigoTurma = codigoTurma;
         this.politica = politica;
+        this.turmaLotada = turmaLotada;
     }
 
     public Aluno getAluno() {
@@ -19,6 +20,10 @@ public class Matricula {
 
     public String getCodigoTurma() {
         return codigoTurma;
+    }
+
+    public boolean isTurmaLotada() {
+        return turmaLotada;
     }
 
     public double calcularValor(double valorBase) {
