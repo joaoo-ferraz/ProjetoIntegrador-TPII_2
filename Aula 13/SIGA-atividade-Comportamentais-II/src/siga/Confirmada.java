@@ -2,6 +2,10 @@ package siga;
 
 public class Confirmada implements EstadoMatricula {
 
+    public void concluir(Matricula matricula){
+        matricula.setEstado(new Concluida());
+    }
+
     @Override
     public void confirmar(Matricula matricula) {
         throw new IllegalStateException("Nao e possivel confirmar uma matricula CONFIRMADA");
