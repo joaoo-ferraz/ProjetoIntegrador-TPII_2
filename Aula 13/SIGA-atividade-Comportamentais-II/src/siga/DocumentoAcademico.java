@@ -9,6 +9,9 @@ public abstract class DocumentoAcademico {
         documento.append(cabecalho());
         documento.append(corpo(aluno));
         documento.append(rodape());
+        if (exigeAssinatura()) {
+            documento.append("\nAssinado digitalmente pela secretaria academica.");
+        }
         registrarEmissao(aluno);
         return documento.toString();
     }
@@ -40,5 +43,9 @@ public abstract class DocumentoAcademico {
     }
 
     protected abstract String tipoDocumento();
+
+    protected boolean exigeAssinatura(){
+        return true;
+    }
 
 }

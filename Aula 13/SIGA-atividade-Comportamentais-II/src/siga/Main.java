@@ -1,13 +1,9 @@
 package siga;
 
-/**
- * Demonstra os três deslizes acontecendo. Execute e observe a saída:
- * é dela que partem as etapas da ficha de atividade prática.
- */
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("=== SIGA - Aula 13: Template Method e State (codigo inicial) ===");
+        System.out.println("=== SIGA - Aula 13: Template Method e State ===");
 
         Aluno regular = new Aluno("2024001", "Maria Silva");
         regular.setCargaCumprida(560);
@@ -16,22 +12,18 @@ public class Main {
         irregular.setRegular(false);
 
         System.out.println();
-        System.out.println("1) Tres documentos, tres copias do mesmo rito");
+        System.out.println("1) Emissao de documentos utilizando Template Method");
         System.out.println(recuar(new HistoricoEscolar().emitir(regular)));
         System.out.println(recuar(new AtestadoFrequencia().emitir(regular)));
-        System.out.println("   >> DESLIZE 1: cinco passos, quatro deles identicos nas tres");
-        System.out.println("      classes. So o corpo varia.");
 
         System.out.println();
-        System.out.println("2) A declaracao de vinculo, com os passos fora de ordem");
+        System.out.println("2) Validacao do aluno antes do registro da emissao");
         System.out.println("   Emitindo para um aluno IRREGULAR:");
         try {
             new DeclaracaoVinculo().emitir(irregular);
         } catch (IllegalStateException e) {
             System.out.println("   [erro] " + e.getMessage());
         }
-        System.out.println("   >> DESLIZE 2: repare na linha de log acima do erro.");
-        System.out.println("      O documento nao foi emitido, mas ja consta no log.");
         System.out.println("      Registros no log: " + LogAcademico.getRegistros());
 
         System.out.println();
